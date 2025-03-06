@@ -9,8 +9,6 @@ public enum State {
 }
 private Scene curScene;
 private State curState;
-private KeyboardInput keyboard;
-private MouseInput mouse;
 
     private void updateState(State newState) {
         if (this.curState == null) {
@@ -30,9 +28,7 @@ private MouseInput mouse;
         }
     } 
 
-    public SceneManager(long window, KeyboardInput keyboard, MouseInput mouse) {
-        this.keyboard = keyboard;
-        this.mouse = mouse;
+    public SceneManager(long window) {
         updateState(State._main_menu_);
     }
 
@@ -40,7 +36,7 @@ private MouseInput mouse;
         curScene.render();
     }
 
-    public void update() {
+    public void update(KeyboardInput keyboard, MouseInput mouse) {
         updateState(curScene.update(keyboard, mouse));
     }
 }

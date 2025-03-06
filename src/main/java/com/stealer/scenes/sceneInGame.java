@@ -5,13 +5,14 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
 import com.stealer.core.KeyboardInput;
 import com.stealer.core.MouseInput;
 import com.stealer.core.SceneManager.State;
-import static com.stealer.core.Rendering.*;
+import com.stealer.game.Game;
 
 public class sceneInGame extends Scene {
-double[] array;
+    Game game;
+
     public sceneInGame(State state) {
         super(state);
-        array = new double[100_000_000];
+        game = new Game();
     }
 
     @Override
@@ -19,19 +20,19 @@ double[] array;
         if (keyboard.isPressed(GLFW_KEY_SPACE)) {
             curState = State._main_menu_;
         }
-        if (mouse.isLeftPressed()) {
-
-        }
+        game.update(keyboard, mouse);
         return curState;
     }
 
     @Override
     public void render() {
-        drawQuad(0, 0, 0.5f, 0.5f, 1, 0, 0);
+        game.draw();
     }
 
     @Override
     public void delete() {
-        array = null;
+        super.delete();
+        game.delete();
+        game = null;
     }
 }

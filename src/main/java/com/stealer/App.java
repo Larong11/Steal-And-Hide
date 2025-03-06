@@ -5,7 +5,17 @@ import org.lwjgl.opengl.*;
 
 import static org.lwjgl.glfw.Callbacks.*;
 import static org.lwjgl.glfw.GLFW.*;
-import static org.lwjgl.opengl.GL11.*;
+import static org.lwjgl.opengl.GL11.GL_COLOR_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_DEPTH_BUFFER_BIT;
+import static org.lwjgl.opengl.GL11.GL_MODELVIEW;
+import static org.lwjgl.opengl.GL11.GL_PROJECTION;
+import static org.lwjgl.opengl.GL11.glClear;
+import static org.lwjgl.opengl.GL11.glClearColor;
+import static org.lwjgl.opengl.GL11.glLoadIdentity;
+import static org.lwjgl.opengl.GL11.glMatrixMode;
+import static org.lwjgl.opengl.GL11.glOrtho;
+import static org.lwjgl.opengl.GL11.glViewport;
+import static org.lwjgl.opengl.GL40.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import com.stealer.core.*;
@@ -47,6 +57,9 @@ private KeyboardInput keyboard;
         if ( !glfwInit() )
 			throw new IllegalStateException("Unable to initialize GLFW");
             
+        
+        
+
         // Setting standart variables \\
         WIDTH = 800;
         HEIGHT = 600;
@@ -54,13 +67,15 @@ private KeyboardInput keyboard;
         window = glfwCreateWindow(this.WIDTH, this.HEIGHT, "Steal And Hide", NULL, NULL);
         mouse = new MouseInput(window);
         keyboard = new KeyboardInput(window);
-        scene = new SceneManager(window, keyboard, mouse);
+        scene = new SceneManager(window);
         // -------------------------- \\
 
         glfwSetWindowAspectRatio(window, 4, 3);
         
         glfwSetFramebufferSizeCallback(window, this::windowResizeCallback);
         glfwMakeContextCurrent(window);
+        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MAJOR, 3);
+        GLFW.glfwWindowHint(GLFW.GLFW_CONTEXT_VERSION_MINOR, 2);
         GL.createCapabilities();
         glMatrixMode(GL_PROJECTION);
         glOrtho(-RATIO, RATIO, -1, 1, -1, 1);
@@ -75,7 +90,7 @@ private KeyboardInput keyboard;
     private void render() {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         scene.render();
-        scene.update();
+        scene.update(keyboard, mouse);
         keyboard.deleteFrame();
         mouse.deleteFrame();
     }

@@ -1,6 +1,7 @@
 package com.stealer.scenes;
 
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
+import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
 import com.stealer.core.KeyboardInput;
 import com.stealer.core.MouseInput;
@@ -20,10 +21,13 @@ private Button startNewGame;
     @Override
     public State update(KeyboardInput keyboard, MouseInput mouse) {
         if (keyboard.isPressed(GLFW_KEY_SPACE)) {
-            System.out.println("Space pressed");
             curState = State._in_game_;
         }
         if (mouse.isLeftPressed()) {
+            float[] pos = mouse.getPos();
+            if (startNewGame.isClicked(pos)) {
+                curState = State._in_game_;
+            }
         }
         return curState;
     }
@@ -32,5 +36,11 @@ private Button startNewGame;
     public void render() {
         drawQuad(0, 0, 2f, 1f, 0, 0, 1);
         startNewGame.draw();
+    }
+
+    @Override
+    public void delete() {
+        super.delete();
+        startNewGame = null;
     }
 }

@@ -21,6 +21,6 @@ protected State curState;
     }
 
     public void delete() {
-        
+        curState = null;
     }
 }
