@@ -1,11 +1,5 @@
 package com.stealer.core;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.InputStream;
-import java.nio.file.Files;
-import java.nio.file.Path;
-
 import org.lwjgl.nanovg.NVGColor;
 import org.lwjgl.nanovg.NanoVG;
 import org.lwjgl.nanovg.NanoVGGL2;

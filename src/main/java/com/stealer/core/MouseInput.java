@@ -2,7 +2,6 @@ package com.stealer.core;
 
 import java.nio.IntBuffer;
 
-import org.lwjgl.BufferUtils;
 import org.lwjgl.glfw.GLFW;
 import org.lwjgl.system.MemoryStack;
 

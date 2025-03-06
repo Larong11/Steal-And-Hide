@@ -5,29 +5,54 @@ import static org.lwjgl.glfw.GLFW.GLFW_KEY_LEFT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_RIGHT;
 import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
 
+import java.util.Vector;
+
 import com.stealer.core.KeyboardInput;
 import com.stealer.core.MouseInput;
 
 
 public class Game {
-
+private Boolean drawCollision;
+private Vector<Wall> walls;
 private Player player;
 
     public Game() {
-        player = new Player();
+        this.player = new Player();
+        this.walls = new Vector<Wall>();
+        this.drawCollision = false;
+
+        initGame();
+    }
+
+    private void initGame() {
+        walls.addLast(new Wall(new float[] {0f, 0.5f}, new float[] {1f, 0.1f}));
+        // walls.addLast(new Wall(new float[] {0.5f, 0f}, new float[] {0.1f, 1f}));
+        walls.addLast(new Wall(new float[] {0f, -0.5f}, new float[] {1f, 0.1f}));
+        walls.addLast(new Wall(new float[] {-0.5f, 0f}, new float[] {0.1f, 1f}));
     }
 
     public void update(KeyboardInput keyboard, MouseInput mouse) {
-        player.update(keyboard);
+        this.player.update(keyboard, walls);
     }
 
     public void draw() {
-        player.draw();
+        this.player.draw(drawCollision);
+        for (Wall w : walls) {
+            w.draw(drawCollision);
+        }
+    }
+    public void changeViewCollision() {
+        this.drawCollision = !this.drawCollision;
+    }
+    
+    public void delete() {
+        this.player.delete();
+        this.player = null;
+        for (Wall w : walls) {
+            w.delete();
+        }
+        walls = null;
     }
 
-    public void delete() {
-        player.delete();
-        player = null;
-    }
 
 }

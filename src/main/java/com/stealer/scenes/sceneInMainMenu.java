@@ -1,7 +1,6 @@
 package com.stealer.scenes;
 
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_SPACE;
-import static org.lwjgl.glfw.GLFW.GLFW_KEY_UP;
+import static org.lwjgl.glfw.GLFW.*;
 
 import com.stealer.core.KeyboardInput;
 import com.stealer.core.MouseInput;
