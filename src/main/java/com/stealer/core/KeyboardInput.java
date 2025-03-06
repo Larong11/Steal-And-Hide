@@ -22,6 +22,7 @@ private final Map<Integer, Boolean> keyReleased = new HashMap<>();
             }
         });
     }
+    
 
     // Returns true if the key is currently held
     public boolean isHold(int key) {
