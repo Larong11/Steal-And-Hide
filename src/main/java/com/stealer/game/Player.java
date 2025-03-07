@@ -88,28 +88,24 @@ private Collision col;
         for (Wall w : walls) {
             int x = Collision.check(col, speed, w.getCollision());
             if ((x & Collision.collideFrom.BOTTOM.getVal()) != 0) {
-                System.out.println("BOTTOM");
                 if (this.speed[1] < 0) {
                     this.pos[1] = w.getCollision().top() + this.size[1] / 2f;
                     this.speedCol[1] = addSpeed;
                 }
             }
             if ((x & Collision.collideFrom.TOP.getVal()) != 0) {
-                System.out.println("TOP");
                 if (this.speed[1] > 0) {
                     this.pos[1] = w.getCollision().bottom() - this.size[1] / 2f;
                     this.speedCol[1] = -addSpeed;
                 }
             }
             if ((x & Collision.collideFrom.LEFT.getVal()) != 0) {
-                System.out.println("LEFT");
                 if (this.speed[0] < 0) {
                     this.pos[0] = w.getCollision().right() + this.size[0] / 2f;
                     this.speedCol[0] = addSpeed;
                 }
             }
             if ((x & Collision.collideFrom.RIGHT.getVal()) != 0) {
-                // System.out.println("RIGHT");
                 if (this.speed[0] > 0) {
                     this.pos[0] = w.getCollision().left() - this.size[0] / 2f;
                     this.speedCol[0] = -addSpeed;
